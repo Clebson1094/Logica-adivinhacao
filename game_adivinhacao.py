@@ -25,6 +25,7 @@ def aposta(jogador, bot, saldo, ganho):
         else:
             saldo -= 9
             print(f"Que pena, o número escolhido era {bot}, foi debitado R$:9 de seu saldo ficando {saldo}")
+            sleep(1)
             print("Vamos girar novamente")
     elif ganho == 2:
         if jogador == bot:
@@ -33,6 +34,7 @@ def aposta(jogador, bot, saldo, ganho):
         else:
             saldo -= 15
             print(f"Que pena, o número escolhido era {bot}, foi debitado R$:15 de seu saldo ficando {saldo}")
+            sleep(1)
             print("Vamos girar novamente")
     else:        
         if jogador == bot:
@@ -41,6 +43,7 @@ def aposta(jogador, bot, saldo, ganho):
         else:
             saldo -= 20
             print(f"Que pena, o número escolhido era {bot}, foi debitado R$:20 de seu saldo ficando {saldo}")
+            sleep(1)
             print("Vamos girar novamente")
     return saldo
 
@@ -55,12 +58,14 @@ while True:
             dificuldade = int(input("Escolha seu grau de dificuldade:\n[1] A rodada Custa 9, Lucro = 9% do saldo \n[2] A rodada Custa 15, Lucro = 15% do saldo \n[3] A rodada Custa 20, Lucro = 20% do saldo "))
             print(f"Você tem {saldo} de saldo, vamos jogar")
             usuario = int(input("Escolha um número de 1 a 10: "))
-            print("Rodando em 3...")
-            sleep(1.5)
-            print("2...")
-            sleep(1.5)
-            print("1...")
-            sleep(1.5)
+            print("Sorteando...")
+            sleep(1)
+            for i in range(1, 10):
+                if i <= 3:
+                    print(f"{i}...")
+                    sleep(1)
+                else:
+                    break
             saldo = aposta(usuario, numero_bot, saldo, dificuldade)
             sleep(1.5)
             
