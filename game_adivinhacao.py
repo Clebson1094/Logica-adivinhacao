@@ -5,6 +5,8 @@ print(" === BEM VINDO AO TIGRINHO LITE === ")
 
 saldo = 0
 
+opcoes_dificuldade = [1, 2, 3]
+numero_possiveis_de_jogo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 codigo = ["jaca", "xwp", "jamelao"]
 codigo_jogador = str(input("Digite seu codigo promocial, ou (NÃO) para continuar: ")).strip().lower()
 negação = ["n", "não", "nao", "no"]
@@ -16,7 +18,23 @@ elif codigo_jogador in negação:
     print("Vamos continuar")
 else:
     print("Não entendi o que quis dizer, vamos continuar")
-    
+
+def dificuldade(opcoes):
+    while True:
+        escolha = int(input("Escolha seu grau de dificuldade:\n[1] A rodada Custa 9, Lucro = 9% do saldo \n[2] A rodada Custa 15, Lucro = 15% do saldo \n[3] A rodada Custa 20, Lucro = 20% do saldo "))
+        if escolha not in opcoes:
+            print("Escolha somente algumas das opções citadas por gentileza")
+            continue
+        elif escolha == 1:
+            return 1
+        elif escolha == 2:
+            return 2
+        elif escolha == 3:
+            return 3
+        else:
+            print("Não entendi o que quis dizer, tente novamente")
+            continue
+        
 def aposta(jogador, bot, saldo, ganho):
     if ganho == 1:
         if jogador == bot:
@@ -49,26 +67,29 @@ def aposta(jogador, bot, saldo, ganho):
 
 while True:
     try:
-        numero_bot = randint(1, 10)
+        numero_bot = randint(1, 11)
         if saldo < 50:
             diferença = 50 - saldo
-            deposito = int(input(f"Seu saldo está R$:{saldo}, precisa de {diferença} para iniciar o game: "))
+            deposito = float(input(f"Seu saldo está R$:{saldo}, precisa de {diferença} para iniciar o game: "))
             saldo += deposito
         else:
-            dificuldade = int(input("Escolha seu grau de dificuldade:\n[1] A rodada Custa 9, Lucro = 9% do saldo \n[2] A rodada Custa 15, Lucro = 15% do saldo \n[3] A rodada Custa 20, Lucro = 20% do saldo "))
+            nivel = dificuldade(opcoes_dificuldade)
             print(f"Você tem {saldo} de saldo, vamos jogar")
             usuario = int(input("Escolha um número de 1 a 10: "))
-            print("Sorteando...")
-            sleep(1)
-            for i in range(1, 10):
-                if i <= 3:
-                    print(f"{i}...")
-                    sleep(1)
-                else:
-                    break
-            saldo = aposta(usuario, numero_bot, saldo, dificuldade)
-            sleep(1.5)
-            
+            if usuario in numero_possiveis_de_jogo:
+                print("Sorteando...")
+                sleep(1)
+                for i in range(1, 10):
+                    if i <= 3:
+                        print(f"{i}...")
+                        sleep(1)
+                    else:
+                        break
+                saldo = aposta(usuario, numero_bot, saldo, nivel)
+                sleep(1.5)
+            else:
+                print("Por gentileza escolha somente números inteiros de 1 a 10, recomeçando da dificuldade...")
+                sleep(1.5)
     except ValueError:
         continuar = input("Não consegui compreender o que disse, deseja continuar? (s/n)")
         if continuar != "s":
