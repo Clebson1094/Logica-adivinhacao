@@ -36,38 +36,24 @@ def dificuldade(opcoes):
             continue
         
 def aposta(jogador, bot, saldo, ganho):
-    if ganho == 1:
-        if jogador == bot:
-            saldo += saldo * 9 / 100
-            print(f"PARABENS!! O número escolhido foi {bot} Você aumento seu saldo em 9%, seu novo saldo R$:{saldo}")
-        else:
-            saldo -= 9
-            print(f"Que pena, o número escolhido era {bot}, foi debitado R$:9 de seu saldo ficando {saldo}")
-            sleep(1)
-            print("Vamos girar novamente")
-    elif ganho == 2:
-        if jogador == bot:
-            saldo += saldo * 15 / 100
-            print(f"PARABENS!! O número escolhido foi {bot} Você aumento seu saldo em 15%, seu novo saldo R$:{saldo}")
-        else:
-            saldo -= 15
-            print(f"Que pena, o número escolhido era {bot}, foi debitado R$:15 de seu saldo ficando {saldo}")
-            sleep(1)
-            print("Vamos girar novamente")
-    else:        
-        if jogador == bot:
-            saldo += saldo * 20 / 100
-            print(f"PARABENS!! O número escolhido foi {bot} Você aumento seu saldo em 20%, seu novo saldo R$:{saldo}")
-        else:
-            saldo -= 20
-            print(f"Que pena, o número escolhido era {bot}, foi debitado R$:20 de seu saldo ficando {saldo}")
-            sleep(1)
-            print("Vamos girar novamente")
+    custos = {1: 9, 2: 15, 3: 20}
+    lucros = {1: 0.09, 2: 0.15, 3: 0.20}
+    custo = custos[ganho]
+    lucro = lucros[ganho]
+
+    if jogador == bot:
+        saldo += saldo * lucro
+        print(f"PARABENS!!! O número escolhido foi {bot}, já foi depositado em seu saldo seu lucro, ficando com R$:{saldo}")
+    else:
+        saldo -= custo
+        print(f"Que pena o número escolhido foi {bot}, foi debitado {custo}")
+        sleep(1)
+        print("Vamos girar novamente")
     return saldo
 
 while True:
     try:
-        numero_bot = randint(1, 11)
+        numero_bot = randint(1, 10)
         if saldo < 50:
             diferença = 50 - saldo
             deposito = float(input(f"Seu saldo está R$:{saldo}, precisa de {diferença} para iniciar o game: "))
