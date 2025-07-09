@@ -2,22 +2,10 @@ from random import randint
 from time import sleep
 
 print(" === BEM VINDO AO TIGRINHO LITE === ")
-
+sleep(1.5)
 saldo = 0
 
 opcoes_dificuldade = [1, 2, 3]
-numero_possiveis_de_jogo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-codigo = ["jaca", "xwp", "jamelao"]
-codigo_jogador = str(input("Digite seu codigo promocial, ou (NÃO) para continuar: ")).strip().lower()
-negação = ["n", "não", "nao", "no"]
-
-if codigo_jogador in codigo:
-    saldo += 50
-    print("Codigo promocional aceito, adicionado R$:50,00 ao seu saldo")
-elif codigo_jogador in negação:
-    print("Vamos continuar")
-else:
-    print("Não entendi o que quis dizer, vamos continuar")
 
 def dificuldade(opcoes):
     while True:
@@ -51,33 +39,47 @@ def aposta(jogador, bot, saldo, ganho):
         print("Vamos girar novamente")
     return saldo
 
+def numeros_possiveis_aposta(jogador):
+    return 1 <= jogador <= 10
+
 while True:
     try:
         numero_bot = randint(1, 10)
         if saldo < 50:
             diferença = 50 - saldo
-            deposito = float(input(f"Seu saldo está R$:{saldo}, precisa de {diferença} para iniciar o game: "))
-            saldo += deposito
-        else:
-            nivel = dificuldade(opcoes_dificuldade)
-            print(f"Você tem {saldo} de saldo, vamos jogar")
-            usuario = int(input("Escolha um número de 1 a 10: "))
-            if usuario in numero_possiveis_de_jogo:
-                print("Sorteando...")
+            try:
+                deposito = float(input(f"Seu saldo está R$:{saldo}, precisa de {diferença} para iniciar o game: "))
+                saldo += deposito
                 sleep(1)
-                for i in range(1, 10):
-                    if i <= 3:
+                print("Carregando déposito...")
+                sleep(1.2)
+                print("Verificando veracidade")
+                sleep(1.9)
+                print("Concluído")
+            except ValueError:
+                print("Tu quer depositar letras? digite número por gentileza...")
+                sleep(1.5)
+        else:
+            try:
+                nivel = dificuldade(opcoes_dificuldade)
+                print(f"Você tem {saldo} de saldo, vamos jogar")
+                usuario = int(input("Digite um número inteiro de 1 a 10: "))
+                if numeros_possiveis_aposta(usuario):
+                    print("Sorteando...")
+                    sleep(1)
+                    for i in range(1, 4):
                         print(f"{i}...")
                         sleep(1)
-                    else:
-                        break
-                saldo = aposta(usuario, numero_bot, saldo, nivel)
-                sleep(1.5)
-            else:
-                print("Por gentileza escolha somente números inteiros de 1 a 10, recomeçando da dificuldade...")
+                    saldo = aposta(usuario, numero_bot, saldo, nivel)
+                    sleep(1.5)
+                else:
+                    print("Apenas número de 1 a 10... recomeçando")
+                    sleep(1.5)
+            except ValueError:
+                print("Tu não sabe ler não bixo?")
                 sleep(1.5)
     except ValueError:
-        continuar = input("Não consegui compreender o que disse, deseja continuar? (s/n)")
+        continuar = input("Não consegui compreender o que disse, deseja continuar? (s/n) ")
         if continuar != "s":
             print("Encerrando...")
             break
