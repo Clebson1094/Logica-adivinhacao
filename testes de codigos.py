@@ -1,16 +1,20 @@
-def niveis_de_apostas(dificuldade):
-    match dificuldade:
-        case 1:
-            return 1
-        case 2:
-            return 2
-        case 3:
-            return 3
-        case _:
-            return "Escolha outra opção"
-     
+def deposito(carteira):
+    while True:
+        try:
+            deposito = float(input("Digite o valor de deposito"))
+            if deposito <= 0:
+                print("Não é aceito deposito zerado ou negativo")
+                continue
+            else:
+                print("Prestou")
+                carteira += deposito
+                return carteira
+        except ValueError:
+            print("Coloque o valor em números por favor!")
+            continue
 
-dificuldade = int(input("Digite"))
-niveis_de_apostas(dificuldade)
+saldo = 0
 
-print(niveis_de_apostas(dificuldade))
+saldo = deposito(saldo)
+
+print(saldo)
