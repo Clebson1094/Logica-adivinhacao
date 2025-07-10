@@ -5,23 +5,17 @@ print(" === BEM VINDO AO TIGRINHO LITE === ")
 sleep(1.5)
 saldo = 0
 
-opcoes_dificuldade = [1, 2, 3]
-
-def dificuldade(opcoes):
+def niveis_de_apostas():
     while True:
-        escolha = int(input("Escolha seu grau de dificuldade:\n[1] A rodada Custa 9, Lucro = 9% do saldo \n[2] A rodada Custa 15, Lucro = 15% do saldo \n[3] A rodada Custa 20, Lucro = 20% do saldo "))
-        if escolha not in opcoes:
-            print("Escolha somente algumas das opções citadas por gentileza")
-            continue
-        elif escolha == 1:
-            return 1
-        elif escolha == 2:
-            return 2
-        elif escolha == 3:
-            return 3
-        else:
-            print("Não entendi o que quis dizer, tente novamente")
-            continue
+        try:
+            dificuldade = int(input("Escolha seu grau de dificuldade:\n[1] A rodada Custa 9, Lucro = 9% do saldo \n[2] A rodada Custa 15, Lucro = 15% do saldo \n[3] A rodada Custa 20, Lucro = 20% do saldo "))
+            match dificuldade:
+                case 1 | 2 | 3:
+                    return dificuldade
+                case _:
+                    print("Escolha um número válido")
+        except ValueError:
+            print("Tente novamente com números de 1 a 3")
         
 def aposta(jogador, bot, saldo, ganho):
     custos = {1: 9, 2: 15, 3: 20}
@@ -61,7 +55,7 @@ while True:
                 sleep(1.5)
         else:
             try:
-                nivel = dificuldade(opcoes_dificuldade)
+                nivel = niveis_de_apostas()
                 print(f"Você tem {saldo} de saldo, vamos jogar")
                 usuario = int(input("Digite um número inteiro de 1 a 10: "))
                 if numeros_possiveis_aposta(usuario):

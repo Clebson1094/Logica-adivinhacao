@@ -1,15 +1,16 @@
-def numeros_possiveis_aposta(jogador):
-    try:
-        if jogador >= 1 and jogador <= 10:
-            return True
-        else:
-            return False
-    except ValueError:
-        return False
-    
-champs = int(input("Digite"))
+def niveis_de_apostas(dificuldade):
+    match dificuldade:
+        case 1:
+            return 1
+        case 2:
+            return 2
+        case 3:
+            return 3
+        case _:
+            return "Escolha outra opção"
+     
 
-if numeros_possiveis_aposta(champs):
-    print("ok")
-else:
-    print("no")
+dificuldade = int(input("Digite"))
+niveis_de_apostas(dificuldade)
+
+print(niveis_de_apostas(dificuldade))
