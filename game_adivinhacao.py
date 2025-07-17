@@ -68,8 +68,21 @@ def aposta(jogador, bot, saldo, ganho):
         print("Vamos girar novamente")
     return saldo
 
-def numeros_possiveis_aposta(jogador):
-    return 1 <= jogador <= 10
+def numeros_possiveis_aposta():
+    while True:
+        try:
+            jogador = int(input("Digite um número inteiro de 1 a 10: "))
+            if 1 <= jogador <= 10:
+                print("Sorteando...")
+                sleep(1)
+                for i in range(1, 4):
+                    print(f"{i}...")
+                    sleep(1)
+                return jogador
+            else:
+                print("Tem quer ser de 1 a 10")
+        except ValueError:
+            print("Apenas NÚMEROS de 1 a 10")
 
 while True:
     try:
@@ -81,18 +94,9 @@ while True:
             try:
                 nivel = niveis_de_apostas()
                 print(f"Você tem {saldo} de saldo, vamos jogar")
-                usuario = int(input("Digite um número inteiro de 1 a 10: "))
-                if numeros_possiveis_aposta(usuario):
-                    print("Sorteando...")
-                    sleep(1)
-                    for i in range(1, 4):
-                        print(f"{i}...")
-                        sleep(1)
-                    saldo = aposta(usuario, numero_bot, saldo, nivel)
-                    sleep(1.5)
-                else:
-                    print("Apenas número de 1 a 10... recomeçando")
-                    sleep(1.5)
+                usuario = numeros_possiveis_aposta()
+                saldo = aposta(usuario, numero_bot, saldo, nivel)
+                sleep(1.5)
             except ValueError:
                 print("Tu não sabe ler não bixo?")
                 sleep(1.5)
