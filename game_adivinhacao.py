@@ -91,15 +91,11 @@ while True:
             diferença = 50 - saldo
             saldo = deposito(saldo, diferença)
         else:
-            try:
-                nivel = niveis_de_apostas()
-                print(f"Você tem {saldo} de saldo, vamos jogar")
-                usuario = numeros_possiveis_aposta()
-                saldo = aposta(usuario, numero_bot, saldo, nivel)
-                sleep(1.5)
-            except ValueError:
-                print("Tu não sabe ler não bixo?")
-                sleep(1.5)
+            nivel = niveis_de_apostas()
+            print(f"Você tem {saldo} de saldo, vamos jogar")
+            usuario = numeros_possiveis_aposta()
+            saldo = aposta(usuario, numero_bot, saldo, nivel)
+            sleep(1.5)
     except ValueError:
         continuar = input("Não consegui compreender o que disse, deseja continuar? (s/n) ")
         if continuar != "s":
