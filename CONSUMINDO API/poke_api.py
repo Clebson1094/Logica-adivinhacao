@@ -1,12 +1,8 @@
 import requests
 import poke_api_nivel_4
 import colorama
-import descobrindo_tipagens
 
 colorama.init(autoreset=True)
-
-elementos = descobrindo_tipagens.tipos
-pokemons = poke_api_nivel_4
 
 while True:
     nome = str(input("Digite o nome do pokemon: ")).lower()
@@ -37,5 +33,3 @@ for habilidade in dados["abilities"]:
 
 for tipo in dados["types"]:
     print("Tipagem", tipo["type"]["name"])
-
-print(elementos)
