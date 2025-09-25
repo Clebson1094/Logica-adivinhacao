@@ -1,6 +1,6 @@
 from random import randint
 
-class caixa:
+class Box:
     def __init__(self):
         self.produtos = [
             {
@@ -13,13 +13,13 @@ class caixa:
         self.valor_de_compra = 0
         self.valor_inicial_do_caixa = 220
 
-    def gerar_codigo(self):
+    def to_generate_code(self):
         return randint(100000000000000, 999999999999999)
 
-    def cadastrar_produtos(self, nome, valor, codigo=None):
+    def register_product(self, nome, valor, codigo=None):
         if codigo is None:
-            codigo = self.gerar_codigo()
-        
+            codigo = self.to_generate_codeo()
+
         self.produtos.append({
             "NOME": nome,
             "VALOR":valor,
@@ -27,7 +27,7 @@ class caixa:
         })
         print(f"Produto {nome} cadastrado com código: {codigo}")
 
-    def passar_produto(self, codigo):
+    def check_product(self, codigo):
         for produto in self.produtos:
             if codigo == produto["CODIGO"]:
                 if produto["NOME"] in self.quantidade_produtos:
@@ -37,7 +37,7 @@ class caixa:
                 return produto
         return None
 
-    def listar_produtos(self):
+    def list_product(self):
         for produto in self.produtos:
             quantidade = self.quantidade_produtos.get(produto["NOME"], 0)
             if quantidade > 0:
@@ -45,7 +45,7 @@ class caixa:
             else:
                 pass
 
-    def troco(self, valor_pago):
+    def change(self, valor_pago):
         if valor_pago < self.valor_de_compra:
             pass
         elif valor_pago == self.valor_de_compra:

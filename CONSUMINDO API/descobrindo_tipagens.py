@@ -14,6 +14,3 @@ for i in range(0, 1302):
             tipos.append(tipo["type"]["name"])
 
 print(tipos)
-    
-
-    
