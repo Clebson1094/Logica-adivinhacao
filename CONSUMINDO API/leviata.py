@@ -1,8 +1,8 @@
 class Eloisa:
     def __init__(self):
-        self.name = "Eloisa"
-        self.peso = "Magrela"
-        self.força = "Inexistente"
+        self.name = ""
+        self.peso = ""
+        self.força = ""
 
     def atacar(self):
         print(f"{self.name} tentou atacar, mas não conseguiu.")
